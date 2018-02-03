@@ -3,13 +3,9 @@ package com.springassignment.demo.Controller;
 import com.springassignment.demo.Model.Employee;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -31,9 +27,23 @@ public class SalaryController {
         return "redirect:/salaryCalculator";
     }
 
-    @RequestMapping(value="/manageEmployee", method=RequestMethod.POST, params="action=remove")
-    public String removeEmployee(@ModelAttribute("employee") Employee employee){
-        employeeList.remove(employee);
+    @RequestMapping(value="/manageEmployee", method=RequestMethod.GET)
+    public String removeEmployee(@RequestParam(name="employee")String name){
+
+        for (Employee e : employeeList) {
+            if (e.getName().equals(name)) {
+                employeeList.remove(e);
+                break;
+            }
+        }
+
+        return "redirect:/salaryCalculator";
+    }
+
+    @RequestMapping(value="/manageEmployee", method=RequestMethod.POST, params="action=removeAll")
+    public String removeEmployees(@ModelAttribute("employee") Employee employee){
+        List<Employee> employees = employeeList;
+        employeeList.removeAll(employees);
         return "redirect:/salaryCalculator";
     }
 
@@ -46,10 +56,10 @@ public class SalaryController {
         }
 
         float mean = sum / employeeList.size();
-        Employee employeeWithHighIncome = employeeList.stream().max(Comparator.comparing(Employee::getSalary)).get();
+        Employee employeeWithHighSalary = employeeList.stream().max(Comparator.comparing(Employee::getSalary)).get();
 
         model.addAttribute("mean", mean);
-        model.addAttribute("employee", employeeWithHighIncome);
+        model.addAttribute("employee", employeeWithHighSalary);
 
         return "result";
     }

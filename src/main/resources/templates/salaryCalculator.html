@@ -15,6 +15,7 @@
             <p>Name: <input type="text" th:field="*{name}" /></p>
             <p>Salary: <input type="number" th:field="*{salary}" /></p>
             <button type="submit" name="action" value="add">Add Employee</button>
+            <input type="reset" value="Reset" />
 
             <table class="table table-striped">
                 <tbody>
@@ -24,14 +25,14 @@
                     </tr>
                     <tr th:each="employee : ${employeeList}">
                         <td th:text="${employee.name}"></td>
+                        <td th:if="${#fields.hasErrors('name')}" th:errors="*{employee.name}">Name Error</td>
                         <td th:text="${employee.salary}"></td>
-                        <td><button type="submit" name="action" value="remove">Remove Employee</button></td>
+                        <td><a th:href="@{/manageEmployee(employee=${employee.name})}">Remove Employee</a></td>
                     </tr>
                 </tbody>
             </table>
             <button type="submit" name="action" value="mean">Calculate Mean</button>
-            <input type="reset" value="Reset" />
-
+            <button type="submit" name="action" value="removeAll">Remove Employees</button>
         </form>
     </body>
 </html>

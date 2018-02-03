@@ -1,8 +1,15 @@
 package com.springassignment.demo.Model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Employee {
 
+    @NotNull
     private String name;
+
+    @NotNull
+    @Size(min=1000)
     private float salary;
 
     public Employee() {

@@ -16,4 +16,9 @@ public class EmployeeRespository {
                 id
         },new BeanPropertyRowMapper<Employee>(Employee.class));
     }
+    public int addEmployeeToDatabase(Employee employee){
+        return jdbcTemplate.update("insert into EMPLOYEE(name,salary) " + "values(?,?)", new Object[]{
+                employee.getName(),employee.getSalary()
+        });
+    }
 }

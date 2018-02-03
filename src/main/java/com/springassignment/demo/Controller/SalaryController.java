@@ -1,6 +1,9 @@
 package com.springassignment.demo.Controller;
 
+import com.springassignment.demo.Database.EmployeeRespository;
 import com.springassignment.demo.Model.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +13,10 @@ import java.util.Comparator;
 import java.util.List;
 
 @Controller
-public class SalaryController {
+public class SalaryController{
+    @Autowired
+    EmployeeRespository employeeRespository;
+
     private List<Employee> employeeList = new ArrayList<>();
 
     @GetMapping("/salaryCalculator")
@@ -23,6 +29,7 @@ public class SalaryController {
 
     @RequestMapping(value="/manageEmployee", method=RequestMethod.POST, params="action=add")
     public String addEmployee(@ModelAttribute("employee") Employee employee){
+        employeeRespository.addEmployeeToDatabase(employee);
         employeeList.add(employee);
         return "redirect:/salaryCalculator";
     }

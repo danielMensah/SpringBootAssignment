@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -56,13 +57,13 @@ public class SalaryController{
 
     @RequestMapping(value="/manageEmployee", method=RequestMethod.POST, params="action=mean")
     public String calculateMeanSalary(Model model) {
-        float sum = 0.0f;
+        BigDecimal sum = null;
 
         for (Employee employee : employeeList) {
-            sum = sum + employee.getSalary();
+            sum = sum.add(employee.getSalary());
         }
 
-        float mean = sum / employeeList.size();
+        BigDecimal mean = sum.divide(BigDecimal.valueOf(employeeList.size()));
         Employee employeeWithHighSalary = employeeList.stream().max(Comparator.comparing(Employee::getSalary)).get();
 
         model.addAttribute("mean", mean);

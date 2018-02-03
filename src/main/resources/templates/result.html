@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+</head>
+<body>
+    <h1>Result</h1>
+
+    <form action="#" th:action="@{/salaryCalculator}" method="get">
+        <p th:text="'The mean of salary is: ' + ${mean}"></p>
+        <p> The employee with the highest salary is: </p>
+        <p th:text="'Name: ' + ${employee.name}" ></p>
+        <p th:text="'Salary: ' + ${employee.salary}" ></p>
+        <button type="submit">Go back</button>
+    </form>
+
+
+    <!--<tr th:each="customer : ${customers}">-->
+        <!--<td th:text="${customer.identity}">001</td>-->
+        <!--<td th:text="${customer.name}">Name</td>-->
+        <!--<td th:text="${customer.address}">Address</td>-->
+        <!--<td th:text="${customer.age}">Age</td>-->
+    <!--</tr>-->
+
+    <!--<p th:text="'Name: ' + ${employee.name}" ></p>-->
+    <!--<p th:text="'Salary: ' + ${employee.salary}" ></p>-->
+    <!--<a href="/salaryCalculator">Submit another message</a>-->
+</body>
+</html>

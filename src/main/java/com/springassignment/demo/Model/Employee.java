@@ -1,7 +1,14 @@
 package com.springassignment.demo.Model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 public class Employee {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String name;
     private float salary;
 
@@ -9,9 +16,18 @@ public class Employee {
 
     }
 
-    public Employee(String name, float salary) {
+    public Employee(Long id, String name, float salary) {
+        this.id = id;
         this.name = name;
         this.salary = salary;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

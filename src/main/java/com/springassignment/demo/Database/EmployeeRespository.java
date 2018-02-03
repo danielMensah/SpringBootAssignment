@@ -1,5 +1,8 @@
 package com.springassignment.demo.Database;
-
+/**
+ * @author Sergio Gayon Benavides
+ * @With the help of Aaron Obeng and Daniel Mensah
+ */
 import com.springassignment.demo.Model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

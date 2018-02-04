@@ -2,7 +2,7 @@ package com.springassignment.demo.Config;
 
 /**
  * @author Sergio Gayon Benavides
- * @With help of Aaron Obeng and Daniel Mensah
+ * @With the help of Aaron Obeng and Daniel Mensah
  */
 
 import org.springframework.context.ApplicationContext;

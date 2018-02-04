@@ -8,10 +8,13 @@
     <h1>Result</h1>
 
     <form action="#" th:action="@{/salaryCalculator}" method="get">
-        <p th:text="'The mean of salary is: ' + ${mean}"></p>
+        <p th:text="'The ' + ${operation} + ' of salaries is: ' + ${result}"></p>
         <p> The employee with the highest salary is: </p>
-        <p th:text="'Name: ' + ${employee.name}" ></p>
-        <p th:text="'Salary: ' + ${employee.salary}" ></p>
+        <p th:text="'Name: ' + ${hEmployee.name}" ></p>
+        <p th:text="'Salary: ' + ${hEmployee.salary}" ></p>
+        <p> The employee with the lowest salary is: </p>
+        <p th:text="'Name: ' + ${lEmployee.name}" ></p>
+        <p th:text="'Salary: ' + ${lEmployee.salary}" ></p>
         <button type="submit">Go back</button>
     </form>
 

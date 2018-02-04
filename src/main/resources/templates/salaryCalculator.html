@@ -29,25 +29,37 @@
                         </div>
                         <div class="btn-group" role="group" aria-label="Basic Group" style="margin-left: 10px;">
                             <button type="submit" class="btn btn-primary" name="action" value="add">Add Employee</button>
-                            <button type="submit" class="btn btn-primary" name="action" value="mean">Calculate Mean</button>
                             <button type="reset" class="btn btn-warning" value="Reset" >Reset</button>
-                            <button type="submit" class="btn btn-danger" name="action" value="removeAll">Remove Employees</button>
+                            <button type="submit" class="btn btn-danger" name="action" value="removeAll" th:disabled="${#lists.isEmpty(employeeList)}">Remove Employees</button>
                         </div>
 
-                        <table class="table table-dark table-hover table-striped" style= "margin-top: 15px;">
+                        <div class="btn-group" role="group" aria-label="Basic Group" style="margin-left: 10px; margin-top: 10px;">
+                            <button type="submit" class="btn btn-outline-primary" name="action" value="mean" th:disabled="${#lists.isEmpty(employeeList)}">Calculate Mean</button>
+                            <button type="submit" class="btn btn-outline-success" name="action" value="sum" th:disabled="${#lists.isEmpty(employeeList)}">Calculate Sum</button>
+                            <button type="submit" class="btn btn-outline-secondary" name="action" value="std" th:disabled="${#lists.isEmpty(employeeList)}">Calculate Standard Deviation</button>
+                        </div>
+
+                        <table class="table table-hover table-striped" style= "margin-top: 15px;">
+                            <thead class="thead-dark">
+                                <tr style="text-align: center;" th:if="!${#lists.isEmpty(employeeList)}">
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Salary</th>
+                                    <th>Remove Employee</th>
+                                </tr>
+                            </thead>
                             <tbody>
-                            <tr style="text-align: center;">
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Salary</th>
-                                <th>Remove Employee</th>
+                            <tr th:if="!${#lists.isEmpty(employeeList)}">
+                                <tr th:each="employee : ${employeeList}" style="text-align: center;">
+                                    <td th:text="${employee.id}"></td>
+                                    <td th:text="${employee.name}"></td>
+                                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{employee.name}">Name Error</td>
+                                    <td th:text="${employee.salary}"></td>
+                                    <td><a th:href="@{/manageEmployee(employee=${employee.id})}">Remove Employee</a></td>
+                                </tr>
                             </tr>
-                            <tr th:each="employee : ${employeeList}" style="text-align: center;">
-                                <td th:text="${employee.id}"></td>
-                                <td th:text="${employee.name}"></td>
-                                <td th:if="${#fields.hasErrors('name')}" th:errors="*{employee.name}">Name Error</td>
-                                <td th:text="${employee.salary}"></td>
-                                <td><a th:href="@{/manageEmployee(employee=${employee.name})}">Remove Employee</a></td>
+                            <tr th:if="${#lists.isEmpty(employeeList)}">
+                                <td style="text-align: center;" >No Employee added</td>
                             </tr>
                             </tbody>
                         </table>

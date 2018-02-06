@@ -1,76 +1,102 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta charset="UTF-8">
-        <title>Hello world</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello world</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <!--<link rel="stylesheet"-->
-              <!--href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"-->
-              <!--th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}" media="screen">-->
+    <!--<link rel="stylesheet"-->
+    <!--href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"-->
+    <!--th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}" media="screen">-->
 
-    </head>
-    <body>
-        <div class="container-fluid" style="margin:0;padding:0;">
-            <div class="col-xs-12 col-md-12 col-lg-12 col-ms-12" style="margin: 0; padding: 0;">
-                <div class="jumbotron jumbotron-fluid" style="text-align: center; background-color: darkcyan;">
-                    <h1>Salary Calculator</h1>
-                </div>
-                <div class="col-xs-12 col-md-12 offset-lg-4 col-lg-4 col-ms-12">
+</head>
+<body>
+<div class="container-fluid" style="margin:0;padding:0;">
+    <div class="col-xs-12 col-md-12 col-lg-12 col-ms-12" style="margin: 0; padding: 0;">
+        <div class="jumbotron jumbotron-fluid" style="text-align: center; background-color: darkcyan;">
+            <h1>Salary Calculator</h1>
+        </div>
+
+        <!--Content Container-->
+        <div class="container-fluid">
+            <div class="row">
+                <!--<div class="col-xs-12 col-md-12 offset-lg-4 col-lg-4 col-ms-12">-->
+                <div class="col-lg-6">
                     <form class=action="#" th:action="@{/manageEmployee}" th:object="${employee}" method="post">
-                        <div class="form-group" >
+                        <div class="form-group">
                             <label for="name">Name:</label>
-                            <input type="text" class="form-control" id="name" th:field="*{name}" />
+                            <input type="text" class="form-control" id="name" th:field="*{name}"/>
                         </div>
-                        <div class="form-group" >
+                        <div class="form-group">
                             <label for="salary">Salary: </label>
-                            <input type="number" step="0.01" class="form-control" id="salary" th:field="*{salary}" />
+                            <input type="number" step="0.01" class="form-control" id="salary" th:field="*{salary}"/>
                         </div>
+                        <div class="text-center">
                         <div class="btn-group" role="group" aria-label="Basic Group" style="margin-left: 10px;">
-                            <button type="submit" class="btn btn-primary" name="action" value="add">Add Employee</button>
-                            <button type="reset" class="btn btn-warning" value="Reset" >Reset</button>
-                            <button type="submit" class="btn btn-danger" name="action" value="removeAll" th:disabled="${#lists.isEmpty(employeeList)}">Remove Employees</button>
+                            <button type="submit" class="btn btn-primary" name="action" value="add">Add Employee
+                            </button>
+                            <button type="reset" class="btn btn-warning" value="Reset">Reset</button>
+                            <button type="submit" class="btn btn-danger" name="action" value="removeAll"
+                                    th:disabled="${#lists.isEmpty(employeeList)}">Remove Employees
+                            </button>
                         </div>
-
-                        <div class="btn-group" role="group" aria-label="Basic Group" style="margin-left: 10px; margin-top: 10px;">
-                            <button type="submit" class="btn btn-outline-primary" name="action" value="mean" th:disabled="${#lists.isEmpty(employeeList)}">Calculate Mean</button>
-                            <button type="submit" class="btn btn-outline-success" name="action" value="sum" th:disabled="${#lists.isEmpty(employeeList)}">Calculate Sum</button>
-                            <button type="submit" class="btn btn-outline-secondary" name="action" value="std" th:disabled="${#lists.isEmpty(employeeList)}">Calculate Standard Deviation</button>
                         </div>
-
-                        <table class="table table-hover table-striped" style= "margin-top: 15px;">
-                            <thead class="thead-dark">
-                                <tr style="text-align: center;" th:if="!${#lists.isEmpty(employeeList)}">
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Salary</th>
-                                    <th>Remove Employee</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:if="!${#lists.isEmpty(employeeList)}">
-                                <tr th:each="employee : ${employeeList}" style="text-align: center;">
-                                    <td th:text="${employee.id}"></td>
-                                    <td th:text="${employee.name}"></td>
-                                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{employee.name}">Name Error</td>
-                                    <td th:text="${employee.salary}"></td>
-                                    <td><a th:href="@{/manageEmployee(employee=${employee.id})}">Remove Employee</a></td>
-                                </tr>
-                            </tr>
-                            <tr th:if="${#lists.isEmpty(employeeList)}">
-                                <td style="text-align: center;" >No Employee added</td>
-                            </tr>
-                            </tbody>
-                        </table>
                     </form>
                 </div>
 
+                <div class="col-lg-6">
+                    <form class=action="#" th:action="@{/manageEmployee}" th:object="${employee}" method="post">
+                        <table class="table table-hover table-striped" style="margin-top: 15px;">
+                            <thead class="thead-dark">
+                            <tr style="text-align: center;" th:if="!${#lists.isEmpty(employeeList)}">
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Salary</th>
+                                <th>Remove Employee</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:if="!${#lists.isEmpty(employeeList)}">
+                            <tr th:each="employee : ${employeeList}" style="text-align: center;">
+                                <td th:text="${employee.id}"></td>
+                                <td th:text="${employee.name}"></td>
+                                <td th:if="${#fields.hasErrors('name')}" th:errors="*{employee.name}">Name Error</td>
+                                <td th:text="${employee.salary}"></td>
+                                <td><a th:href="@{/manageEmployee(employee=${employee.id})}">Remove Employee</a></td>
+                            </tr>
+                            </tr>
+                            <tr th:if="${#lists.isEmpty(employeeList)}">
+                                <td style="text-align: center;">No Employee added</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-center">
+                        <div class="btn-group" role="group" aria-label="Basic Group"
+                             style="margin-left: 10px; margin-top: 10px;">
+                            <button type="submit" class="btn btn-outline-primary" name="action" value="mean"
+                                    th:disabled="${#lists.isEmpty(employeeList)}">Calculate Mean
+                            </button>
+                            <button type="submit" class="btn btn-outline-success" name="action" value="sum"
+                                    th:disabled="${#lists.isEmpty(employeeList)}">Calculate Sum
+                            </button>
+                            <button type="submit" class="btn btn-outline-secondary" name="action" value="std"
+                                    th:disabled="${#lists.isEmpty(employeeList)}">Calculate Standard Deviation
+                            </button>
+                        </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    </body>
+
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
 </html>

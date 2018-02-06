@@ -2,21 +2,34 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Results</title>
 </head>
 <body>
-    <h1>Result</h1>
+<div class="container-fluid" style="margin:0;padding:0;">
+    <div class="col-xs-12 col-md-12 col-lg-12 col-ms-12" style="margin: 0; padding: 0;">
+        <div class="jumbotron jumbotron-fluid" style="text-align: center; background-color: darkcyan;">
+            <h1>Results</h1>
+        </div>
+        <div class="col-xs-12 col-md-12 offset-lg-4 col-lg-4 col-ms-12">
 
-    <form action="#" th:action="@{/salaryCalculator}" method="get">
-        <p th:text="'The ' + ${operation} + ' of salaries is: ' + ${result}"></p>
-        <p> The employee with the highest salary is: </p>
-        <p th:text="'Name: ' + ${hEmployee.name}" ></p>
-        <p th:text="'Salary: ' + ${hEmployee.salary}" ></p>
-        <p> The employee with the lowest salary is: </p>
-        <p th:text="'Name: ' + ${lEmployee.name}" ></p>
-        <p th:text="'Salary: ' + ${lEmployee.salary}" ></p>
-        <button type="submit">Go back</button>
-    </form>
+            <form action="#" th:action="@{/salaryCalculator}" method="get">
+                <p th:text="'The ' + ${operation} + ' of salaries is: ' + ${result}"></p>
+                <p> The employee with the highest salary is: </p>
+                <p th:text="'Name: ' + ${hEmployee.name}"></p>
+                <p th:text="'Salary: ' + ${hEmployee.salary}"></p>
+                <p> The employee with the lowest salary is: </p>
+                <p th:text="'Name: ' + ${lEmployee.name}"></p>
+                <p th:text="'Salary: ' + ${lEmployee.salary}"></p>
+                <!--<button type="submit">Go back</button>-->
+                <div class="btn-group" role="group" aria-label="Basic Group" style="margin-left: 0px; margin-top: 10px;">
+                    <button type="submit" class="btn btn-outline-primary" name="action">Go back</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
     <!--<tr th:each="customer : ${customers}">-->
@@ -29,5 +42,7 @@
     <!--<p th:text="'Name: ' + ${employee.name}" ></p>-->
     <!--<p th:text="'Salary: ' + ${employee.salary}" ></p>-->
     <!--<a href="/salaryCalculator">Submit another message</a>-->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

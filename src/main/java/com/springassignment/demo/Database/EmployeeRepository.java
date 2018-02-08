@@ -20,7 +20,7 @@ public class EmployeeRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public Employee findById(int id){
+    public Employee findById(long id){
         return jdbcTemplate.queryForObject("select * from EMPLOYEE where id=?", new Object[]{
                 id
         },new BeanPropertyRowMapper<Employee>(Employee.class));
@@ -63,9 +63,11 @@ public class EmployeeRepository {
         }
     }
 
-    public void updateEmployee(Long id,String name,BigDecimal salary){
-        String sql = "UPDATE EMPLOYEE SET NAME ="+name+", SALARY="+salary+" AND WHERE id = ?";
-        Object[] params = {id};
+    public void updateEmployee(Employee employee){
+        String sql = "UPDATE EMPLOYEE SET NAME =? , SALARY=?  WHERE id  = ?";
+//        String sql = "UPDATE EMPLOYEE(name, salary) SET VALUES(?,?) WHERE id IN ("+employee.getId()+")";
+//        String sql = "UPDATE EMPLOYEE ";
+        Object[] params = {employee.getName(), employee.getSalary(),employee.getId()};
         jdbcTemplate.update(sql,params);
     }
 

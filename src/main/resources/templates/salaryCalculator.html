@@ -34,8 +34,7 @@
                         </div>
                         <div class="text-center">
                             <div class="btn-group" role="group" aria-label="Basic Group" style="margin-left: 10px;">
-                                <button type="submit" class="btn btn-primary" name="action" value="add">Add Employee
-                                </button>
+                                <button type="submit" class="btn btn-primary" name="action" value="add">Add Employee</button>
                                 <button type="reset" class="btn btn-warning" value="Reset">Reset</button>
                                 <button type="submit" class="btn btn-danger" name="action" value="removeAll"
                                         th:disabled="${#lists.isEmpty(employeeList)}">Remove Employees
@@ -53,6 +52,8 @@
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Salary</th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,7 +64,7 @@
                                     <td th:if="${#fields.hasErrors('name')}" th:errors="*{employee.name}">Name Error</td>
                                     <td th:text="${employee.salary}"></td>
                                     <td><a th:href="@{/manageEmployee(employee=${employee.id})}">Remove</a></td>
-                                    <td><a th:href="@{/manageEmployee(employee=${employee})}">Update</a></td>
+                                    <td><a th:href="@{/updateEmployee(employee=${employee.id})}">Update</a></td>
                                 </tr>
                             </tr>
                             <tr th:if="${#lists.isEmpty(employeeList)}">

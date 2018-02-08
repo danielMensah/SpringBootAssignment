@@ -17,6 +17,8 @@ public class SalaryController{
     @Autowired
     EmployeeRepository employeeRepository;
 
+    Long employeeId;
+
     @GetMapping("/salaryCalculator")
     public String salaryForm(Model model) {
 
@@ -38,10 +40,19 @@ public class SalaryController{
         return "redirect:/salaryCalculator";
     }
     //Update single employee
-    @RequestMapping(value="/manageEmployee",method=RequestMethod.POST, params="action=update")
-    public String updateEmployee(@RequestParam(name="employee") Employee employee){
-        System.out.println(employee.getId());
-        employeeRepository.updateEmployee(employee.getId(),employee.getName(),employee.getSalary());
+    @RequestMapping(value="/updateEmployee",method=RequestMethod.GET)
+    public String editEmployee(@RequestParam(name="employee") Long id, Model model){
+        employeeId = id;
+//        System.out.println(employee.getId());
+//        employeeRepository.updateEmployee(employee.getId(),employee.getName(),employee.getSalary());
+        model.addAttribute("employee", new Employee());
+        model.addAttribute("employeeData",employeeRepository.findById(employeeId));
+        return "editEmployee";
+    }
+    @RequestMapping(value="/updateEmployee", method=RequestMethod.POST, params="action=update")
+    public String updateEmployee(@ModelAttribute("employee") Employee employee){
+        employee.setId(employeeId);
+        employeeRepository.updateEmployee(employee);
         return "redirect:/salaryCalculator";
     }
     @RequestMapping(value="/manageEmployee", method=RequestMethod.POST, params="action=removeAll")

@@ -63,6 +63,12 @@ public class EmployeeRepository {
         }
     }
 
+    public void updateEmployee(Long id,String name,BigDecimal salary){
+        String sql = "UPDATE EMPLOYEE SET NAME ="+name+", SALARY="+salary+" AND WHERE id = ?";
+        Object[] params = {id};
+        jdbcTemplate.update(sql,params);
+    }
+
     public void removeEmployee(Long id) {
         String sql = "DELETE from EMPLOYEE WHERE id = ?";
         Object[] params = {id};

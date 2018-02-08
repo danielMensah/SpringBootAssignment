@@ -49,22 +49,22 @@
                     <form class=action="#" th:action="@{/manageEmployee}" th:object="${employee}" method="post">
                         <table class="table table-hover table-striped" style="margin-top: 15px;">
                             <thead class="thead-dark">
-                            <tr style="text-align: center;" th:if="!${#lists.isEmpty(employeeList)}">
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Salary</th>
-                                <th>Remove Employee</th>
-                            </tr>
+                                <tr style="text-align: center;" th:if="!${#lists.isEmpty(employeeList)}">
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Salary</th>
+                                </tr>
                             </thead>
                             <tbody>
                             <tr th:if="!${#lists.isEmpty(employeeList)}">
-                            <tr th:each="employee : ${employeeList}" style="text-align: center;">
-                                <td th:text="${employee.id}"></td>
-                                <td th:text="${employee.name}"></td>
-                                <td th:if="${#fields.hasErrors('name')}" th:errors="*{employee.name}">Name Error</td>
-                                <td th:text="${employee.salary}"></td>
-                                <td><a th:href="@{/manageEmployee(employee=${employee.id})}">Remove Employee</a></td>
-                            </tr>
+                                <tr th:each="employee : ${employeeList}" style="text-align: center;">
+                                    <td th:text="${employee.id}"></td>
+                                    <td th:text="${employee.name}"></td>
+                                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{employee.name}">Name Error</td>
+                                    <td th:text="${employee.salary}"></td>
+                                    <td><a th:href="@{/manageEmployee(employee=${employee.id})}">Remove</a></td>
+                                    <td><a th:href="@{/manageEmployee(employee=${employee})}">Update</a></td>
+                                </tr>
                             </tr>
                             <tr th:if="${#lists.isEmpty(employeeList)}">
                                 <td style="text-align: center;">No Employee added</td>
@@ -87,6 +87,7 @@
                         </div>
                     </form>
                 </div>
+
             </div>
         </div>
 

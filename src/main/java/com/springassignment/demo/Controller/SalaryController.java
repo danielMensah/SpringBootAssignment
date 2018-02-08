@@ -37,7 +37,13 @@ public class SalaryController{
         employeeRepository.removeEmployee(id);
         return "redirect:/salaryCalculator";
     }
-
+    //Update single employee
+    @RequestMapping(value="/manageEmployee",method=RequestMethod.POST, params="action=update")
+    public String updateEmployee(@RequestParam(name="employee") Employee employee){
+        System.out.println(employee.getId());
+        employeeRepository.updateEmployee(employee.getId(),employee.getName(),employee.getSalary());
+        return "redirect:/salaryCalculator";
+    }
     @RequestMapping(value="/manageEmployee", method=RequestMethod.POST, params="action=removeAll")
     public String removeEmployees(@ModelAttribute("employee") Employee employee){
         employeeRepository.removeEmployees();
@@ -117,4 +123,5 @@ public class SalaryController{
 
         return "result";
     }
+
 }
